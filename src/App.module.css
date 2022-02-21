@@ -1,0 +1,37 @@
+.container--upload {
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    width: 700px;
+}
+
+.result {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    height: 100px;
+    width: 350px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.result h2 {
+    font-size: 25px;
+    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6);
+}
+
+.win {
+    background-color: #a5d6a7;
+}
+
+.lose {
+    background-color: #e57373;
+}

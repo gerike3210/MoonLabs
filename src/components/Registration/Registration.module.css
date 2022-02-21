@@ -1,0 +1,64 @@
+.container--registration {
+    color: #303f9f;
+    text-align: center;
+}
+.title {
+    font-size: 45px;
+    font-weight: 700;
+}
+hr {
+    background-color: #303f9f;
+    border: none;
+    height: 2px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 50%;
+}
+.section {
+    margin-bottom: 15px;
+}
+
+.section label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.section input {
+    width: 50%;
+}
+
+.section input:focus {
+    border: none;
+    outline: 1px solid #3949ab;
+}
+
+.section input[type="checkbox"]:focus {
+    border: none;
+    outline: none;
+}
+
+.container--checkbox {
+    align-items: center;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.container--checkbox input,
+.container--checkbox p {
+    display: inline-block;
+    width: auto;
+}
+
+.container--checkbox p {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.error .error-text {
+    color: red;
+}

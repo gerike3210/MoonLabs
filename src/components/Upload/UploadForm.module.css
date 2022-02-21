@@ -1,0 +1,64 @@
+.title {
+    color: #fdd835;
+    font-size: 70px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+}
+.section {
+    margin-bottom: 20px;
+}
+.section label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+.section input {
+    width: 50%;
+}
+.date--sections {
+    align-items: center;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 5fr 1fr 1fr;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin: 0 auto;
+    width: 50%;
+}
+.date--sections h3 {
+    display: flex;
+    font-size: 13px;
+}
+.date--sections select {
+    padding: 8px 5px;
+}
+.date--day {
+    width: 100%;
+}
+.btn {
+    background-color: #29b6f6;
+    border-radius: 100px;
+    border: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 10px 50px;
+    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+}
+.btn:hover {
+    background-color: #4fc3f7;
+}
+.error input,
+.error select {
+    border: 2px solid #e57373 !important;
+    outline: 1px solid #e57373 !important;
+}
+.error h5 {
+    color: #e57373;
+    margin-top: 5px;
+}

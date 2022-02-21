@@ -1,0 +1,99 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sendFormData } from "../../store/actions/request-action";
+import Modal from "../UI/Modal";
+import validation from "../../hooks/validationRulesRegister";
+
+import classes from "./Registration.module.css";
+import useForm from "../../hooks/useForm";
+import Input from "../UI/Input";
+
+const Registration = ({ onClose }) => {
+    const dispatch = useDispatch();
+    const { email } = useSelector((state) => state.upload.formData);
+    const {
+        changeInputHandler,
+        inputData,
+        submitInputHandler,
+        errors,
+        isSubmitted,
+    } = useForm(validation);
+
+    const { name, checkbox } = inputData;
+
+    useEffect(() => {
+        if (isSubmitted && Object.keys(errors).length === 0) {
+            dispatch(
+                sendFormData({
+                    url: "https://ncp.staging.moonproject.io/api/fulop-gergely/user/register",
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: {
+                        email,
+                        name,
+                    },
+                })
+            );
+        }
+    }, [isSubmitted, dispatch, sendFormData, errors, email, name]);
+
+    const nameClass = errors.name
+        ? `${classes["section"]} ${classes["name"]} ${classes["error"]}`
+        : `${classes["section"]} ${classes["name"]}`;
+    const checkboxClass = errors.checkbox
+        ? `${classes["section"]} ${classes["checkbox"]} ${classes["error"]}`
+        : `${classes["section"]} ${classes["checkbox"]}`;
+
+    return (
+        <Modal onClose={onClose}>
+            <form
+                onSubmit={submitInputHandler}
+                className={classes["container--registration"]}
+            >
+                <h2 className={classes["title"]}>Regisztráció</h2>
+                <hr />
+                <div>
+                    <div className={classes["section"]}>
+                        <label htmlFor="email">E-MAIL CIM:</label>
+                        <Input name="email" value={email} readOnly />
+                    </div>
+                    <div className={nameClass}>
+                        <label htmlFor="name">NÉV:</label>
+                        <Input
+                            name="name"
+                            type="text"
+                            onChange={changeInputHandler}
+                            placeholder="Szabó János"
+                        />
+                        {errors.name && (
+                            <p className={classes["error-text"]}>
+                                {errors.name}
+                            </p>
+                        )}
+                    </div>
+                    <div className={checkboxClass}>
+                        <div className={classes["container--checkbox"]}>
+                            <Input
+                                type="checkbox"
+                                name="checkbox"
+                                onChange={changeInputHandler}
+                                checked={checkbox}
+                            />
+                            <p>Elolvastam és elfogadom a játékszabályzatot!</p>
+                        </div>
+                        {errors.checkbox && (
+                            <p className={classes["error-text"]}>
+                                {errors.checkbox}
+                            </p>
+                        )}
+                    </div>
+                    <button type="submit">Regisztrálok</button>
+                </div>
+            </form>
+        </Modal>
+    );
+};
+
+export default Registration;
