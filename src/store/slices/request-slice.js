@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isRegister: null,
-    isFetchRegistered: null,
+    isRegisterNeeded: false,
     result: {
         isWinner: null,
         isSucces: null,
     },
+    isShowResult: null,
 };
 
 const requestSlice = createSlice({
@@ -14,17 +14,14 @@ const requestSlice = createSlice({
     initialState: initialState,
     reducers: {
         setRegister(state, action) {
-            state.isRegister = action.payload;
-        },
-        setInitial(state) {
-            state.isRegister = initialState.isRegister;
+            state.isRegisterNeeded = action.payload;
         },
         setSuccesRequest(state, action) {
             state.result.isWinner = action.payload;
             state.result.isSucces = true;
         },
-        setFetchRegistered(state, action) {
-            state.isFetchRegistered = action.payload;
+        setIsShowResult(state, action) {
+            state.isShowResult = action.payload;
         },
     },
 });

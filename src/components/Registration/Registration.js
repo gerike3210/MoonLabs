@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendFormData } from "../../store/actions/request-action";
-import Modal from "../UI/Modal";
+import useForm from "../../hooks/useForm";
 import validation from "../../hooks/validationRulesRegister";
+import Modal from "../UI/Modal";
+import Input from "../UI/Input";
 
 import classes from "./Registration.module.css";
-import useForm from "../../hooks/useForm";
-import Input from "../UI/Input";
+import Button from "../UI/Button";
 
 const Registration = ({ onClose }) => {
     const dispatch = useDispatch();
@@ -18,7 +19,6 @@ const Registration = ({ onClose }) => {
         errors,
         isSubmitted,
     } = useForm(validation);
-
     const { name, checkbox } = inputData;
 
     useEffect(() => {
@@ -37,14 +37,14 @@ const Registration = ({ onClose }) => {
                 })
             );
         }
-    }, [isSubmitted, dispatch, sendFormData, errors, email, name]);
+    }, [dispatch, errors, email, name, isSubmitted]);
 
-    const nameClass = errors.name
-        ? `${classes["section"]} ${classes["name"]} ${classes["error"]}`
-        : `${classes["section"]} ${classes["name"]}`;
-    const checkboxClass = errors.checkbox
-        ? `${classes["section"]} ${classes["checkbox"]} ${classes["error"]}`
-        : `${classes["section"]} ${classes["checkbox"]}`;
+    const nameClass = `${classes["section"]} ${classes["name"]} ${
+        errors.name ? classes["error"] : ""
+    }`;
+    const checkboxClass = `${classes["section"]} ${classes["checkbox"]} ${
+        errors.checkbox ? classes["error"] : ""
+    }`;
 
     return (
         <Modal onClose={onClose}>
@@ -89,7 +89,13 @@ const Registration = ({ onClose }) => {
                             </p>
                         )}
                     </div>
-                    <button type="submit">Regisztrálok</button>
+                    <Button
+                        type="submit"
+                        disabled={!checkbox}
+                        className={classes["btn"]}
+                    >
+                        Regisztrálok
+                    </Button>
                 </div>
             </form>
         </Modal>

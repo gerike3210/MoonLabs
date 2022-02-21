@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { uploadActions } from "../../store/slices/upload-slice";
+import { requestAction } from "../../store/slices/request-slice";
 import useForm from "../../hooks/useForm";
 import validation from "../../hooks/validationRulesForm";
 import {
@@ -13,6 +14,7 @@ import {
 
 import classes from "./UploadForm.module.css";
 import Input from "../UI/Input";
+import Button from "../UI/Button";
 
 const UploadForm = () => {
     const dispatch = useDispatch();
@@ -31,44 +33,46 @@ const UploadForm = () => {
         min: minError,
     } = errors;
 
+    const submitForm = (event) => {
+        submitInputHandler(event);
+        dispatch(requestAction.setIsShowResult(false));
+    };
+
     useEffect(() => {
         if (isFormValid) {
-            dispatch(
-                uploadActions.setValidInputData({
-                    email: inputData.email,
-                    code: inputData.code,
-                    date: formDateValue(
-                        +inputData.day +
-                            inputData.hour * 60 * 60 * 1000 +
-                            inputData.min * 60 * 1000
-                    ),
-                })
-            );
+            const validData = {
+                email: inputData.email,
+                code: inputData.code,
+                purchase_time: formDateValue(
+                    +inputData.day +
+                        inputData.hour * 60 * 60 * 1000 +
+                        inputData.min * 60 * 1000
+                ),
+            };
+            dispatch(uploadActions.setValidInputData(validData));
             dispatch(uploadActions.setIsValidForm(true));
-        } else {
-            dispatch(uploadActions.setIsValidForm(false));
+            inputData.code = "";
         }
-    }, [isFormValid, inputData]);
+    }, [dispatch, inputData, isFormValid]);
 
-    const emailClass = emailError
-        ? `${classes["section"]} ${classes["email"]} ${classes["error"]}`
-        : `${classes["section"]} ${classes["email"]}`;
+    const emailClass = `${classes["section"]} ${classes["email"]} ${
+        emailError ? classes["error"] : ""
+    }`;
 
-    const codeClass = codeError
-        ? `${classes["section"]} ${classes["code"]} ${classes["error"]}`
-        : `${classes["section"]} ${classes["code"]}`;
+    const codeClass = `${classes["section"]} ${classes["code"]} ${
+        codeError ? classes["error"] : ""
+    }`;
 
-    const hourClass = hourError
-        ? `${classes["option"]} ${classes["hour"]} ${classes["error"]}`
-        : `${classes["option"]} ${classes["hour"]}`;
+    const hourClass = `${classes["option"]} ${classes["hour"]} ${
+        hourError ? classes["error"] : ""
+    }`;
 
-    const minClass = minError
-        ? `${classes["option"]} ${classes["min"]} ${classes["error"]}`
-        : `${classes["option"]} ${classes["min"]}`;
-
+    const minClass = `${classes["option"]} ${classes["min"]} ${
+        minError ? classes["error"] : ""
+    }`;
     return (
         <div className={classes["container--upload"]}>
-            <form onSubmit={(e) => submitInputHandler(e)}>
+            <form onSubmit={submitForm}>
                 <h1 className={classes["title"]}>Kódfeltöltés</h1>
                 <div className={emailClass}>
                     <label htmlFor="email">E-MAIL CIM:</label>
@@ -86,6 +90,7 @@ const UploadForm = () => {
                         type="text"
                         name="code"
                         placeholder="A01234567"
+                        value={inputData.code || ""}
                         onChange={changeInputHandler}
                     />
                     {errors.code && <h5>{errors.code}</h5>}
@@ -141,9 +146,9 @@ const UploadForm = () => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className={classes["btn"]}>
+                <Button type="submit" className={classes["btn"]}>
                     Kódfeltöltés
-                </button>
+                </Button>
             </form>
         </div>
     );

@@ -10,6 +10,8 @@ const Input = ({
     value,
     defaultValue,
     defaultChecked,
+    readOnly,
+    autoFocus,
 }) => {
     return (
         <input
@@ -21,6 +23,8 @@ const Input = ({
             defaultValue={defaultValue}
             placeholder={placeholder}
             type={type}
+            readOnly={readOnly}
+            autoFocus={autoFocus}
         >
             {children}
         </input>

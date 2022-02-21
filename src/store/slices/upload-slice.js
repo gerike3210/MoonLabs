@@ -19,10 +19,6 @@ const uploadSlice = createSlice({
         setIsValidForm(state, action) {
             state.isValidForm = action.payload;
         },
-        setInitial(state) {
-            state.formData = initialState.formData;
-            state.isValidForm = initialState.isValidForm;
-        },
     },
 });
 

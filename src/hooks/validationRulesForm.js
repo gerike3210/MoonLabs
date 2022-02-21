@@ -4,13 +4,13 @@ const EMAIL_FORMAT =
 const CODE_FORMAT = /^[A-Z0-9]\d{8}$/i;
 
 export default function validationRulesForm(inputData) {
-    let errors = {};
+    const errors = {};
 
-    if (!inputData.email.match(EMAIL_FORMAT)) {
+    if (!inputData.email || !inputData.email.match(EMAIL_FORMAT)) {
         errors.email = "Helytelen email formátum!";
     }
 
-    if (!inputData.code.match(CODE_FORMAT)) {
+    if (!inputData.code || !inputData.code.match(CODE_FORMAT)) {
         errors.code = "Helytelen kód formátum!";
     }
 

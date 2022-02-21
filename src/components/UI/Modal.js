@@ -1,5 +1,3 @@
-import ReactDOM from "react-dom";
-
 import classes from "./Modal.module.css";
 
 const Backdrop = ({ onClose }) => {
@@ -17,8 +15,8 @@ const ModalOverlay = ({ children }) => {
 const Modal = ({ children, onClose }) => {
     return (
         <>
-            <Backdrop onClose={onClose} />, portalElement
-            <ModalOverlay>{children}</ModalOverlay>, portalElement
+            <Backdrop onClose={onClose} />
+            <ModalOverlay>{children}</ModalOverlay>
         </>
     );
 };

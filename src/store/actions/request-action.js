@@ -7,22 +7,19 @@ export const sendFormData = (configObj) => {
             const responseData = await sendRequest(configObj);
 
             const [[key, value]] = Object.entries(responseData);
-            console.log(value);
 
             if (key === "errors" && value[0].code === "email:not_found") {
                 dispatch(requestAction.setRegister(true));
             }
             if (key === "data") {
-                if (Object.keys(value).length === 2) {
+                if (responseData.data.hasOwnProperty("won")) {
                     dispatch(requestAction.setSuccesRequest(value.won));
+                    dispatch(requestAction.setIsShowResult(true));
                 }
-                if (Object.keys(value).length === 1) {
-                    dispatch(requestAction.setRegister(false));
-                    dispatch(requestAction.setFetchRegistered(true));
-                }
+                dispatch(requestAction.setRegister(false));
             }
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         }
     };
 };

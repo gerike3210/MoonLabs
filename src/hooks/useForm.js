@@ -13,10 +13,10 @@ const useForm = (validation) => {
     });
     const [errors, setErrors] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const isFormValid = Object.keys(errors).length === 0 && isSubmitted;
 
     const changeInputHandler = (event) => {
         const { name, value, checked } = event.target;
-        console.log(name, value);
         setInputData({ ...inputData, [name]: value || checked });
         setIsSubmitted(false);
     };
@@ -26,8 +26,6 @@ const useForm = (validation) => {
         setIsSubmitted(true);
         setErrors(validation(inputData));
     };
-
-    const isFormValid = Object.keys(errors).length === 0 && isSubmitted;
 
     return {
         changeInputHandler,
