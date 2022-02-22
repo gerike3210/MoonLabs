@@ -121,7 +121,7 @@ const UploadForm = () => {
                             >
                                 {HOURS.map((hour) => (
                                     <option key={hour} value={hour}>
-                                        {hour >= 0
+                                        {hour !== "empty"
                                             ? hour.toString().padStart(2, "0")
                                             : ""}
                                     </option>
@@ -137,7 +137,7 @@ const UploadForm = () => {
                             >
                                 {MINUTES.map((minute) => (
                                     <option key={minute} value={minute}>
-                                        {minute >= 0
+                                        {minute !== "empty"
                                             ? minute.toString().padStart(2, "0")
                                             : ""}
                                     </option>

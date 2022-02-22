@@ -4,18 +4,18 @@ const END_DAY_UNIX = 1_648_764_000_000;
 const DAY_MILLISEC = 86_400_000;
 
 export const DAYS_UNIX = [];
-export const HOURS = [];
-export const MINUTES = [];
+export const HOURS = ["empty"];
+export const MINUTES = ["empty"];
 
 for (let i = START_DAY_UNIX; i < END_DAY_UNIX; i += DAY_MILLISEC) {
     DAYS_UNIX.push(i);
 }
 
-for (let i = -1; i < 24; i++) {
+for (let i = 0; i < 24; i++) {
     HOURS.push(i);
 }
 
-for (let i = -1; i < 60; i++) {
+for (let i = 0; i < 60; i++) {
     MINUTES.push(i);
 }
 

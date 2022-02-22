@@ -14,11 +14,11 @@ export default function validationRulesForm(inputData) {
         errors.code = "Helytelen kód formátum!";
     }
 
-    if (inputData.hour < 0 || !inputData.hour) {
+    if (inputData.hour === "empty" || !inputData.hour) {
         errors.hour = "Hiányzó adat!";
     }
 
-    if (inputData.min < 0 || !inputData.min) {
+    if (inputData.min === "empty" || !inputData.min) {
         errors.min = "Hiányzó adat!";
     }
 
